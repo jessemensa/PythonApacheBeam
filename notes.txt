@@ -1,0 +1,329 @@
+
+Python 
+Data Structures => Lists, Tuples, Dictionaries, Sets 
+all these can be looped through 
+
+Variables => small case 
+Constants => CAPITAL CASE 
+
+Taking a response from user => input keyword 
+
+Control flow statements 
+1. sequence control structures => line by line executions 
+2. selection control structures => decisions 
+3. iteration control structures => for comparisons 
+
+for loops => run over an iterable 
+while loop => execute something as long as the condition is true 
+inside while loop, lots of executions can happen as long as condition is true 
+
+Operations 
+=> Logical operations, Arithmetic operations, Assignment operations, Comparison operations 
+
+Selection statements
+first set condition
+if statement & else statements (Memberships) 
+
+Functions => block of code that performs a specific task 
+variables, for, while, conditions, memberships can be set inside a function 
+functions can take parameters that can be used inside the function 
+functions can take a specific number of parameters or unlimited number of parameters 
+=> **kwargs vs *args 
+
+
+OBJECT ORIENTED PROGRAMMING 
+class 
+inititalisation 
+objects take properties of the class 
+methods are functions inside class 
+methods will take self 
+
+ATTRIBUTES => class attributes vs instance attributes 
+instance attributes => each object created with that class has its own copy 
+of attributes. defined inside init 
+class attributes => all objects created from the class share the attributes 
+associated with the class as a whole and not the instance 
+
+
+DECORATORS 
+STATIC METHOD => will execute without the class being instantiated 
+once a method is static, cannot use it to call instances of that class 
+why then use static method ?? use it to perform some unrelated tasks 
+static methods cannot access instance attributes 
+static methods can only be used by the class 
+CLASS METHOD => same as static method but can access class attributes 
+Inheritance 
+its possible to override methods in classes inherited 
+
+PROCESSING FILES 
+TEXT FILES, CSV FILES AND JSON FILES 
+
+PATH => USED TO IDENTIFY THE LOCATION OF A FILE AND USE IT IN A PROGRAM 
+ABSOLUTE PATH => A PATH THAT INCLUDES ALL INFORMATION REQUIRED TO FIND THE FILE 
+RELATIVE PATH => PATH that starts from the directory where the python script is stored 
+
+GOOGLE SOME BASIC PYTHON FUNCTIONS USED TO PROCESS CSV, TEXT FILES ETC 
+Functions can be created with methods like open(), close() 
+for loop, while loop, if and else statements 
+variables, constants etc 
+
+CHECKING FOR A FILES EXISTENCE: USE OS 
+import os 
+os.path.exists("....") 
+
+READING A CSV FILE 
+use open() method, readline 
+for loop to run through to look for what u want 
+variables that hold values that will be used in computation 
+
+CREATE A LIST FROM A DATASET 
+function with filepath and delimeter 
+import csv 
+create a an empty list where values will be stored 
+with open statement 
+DICTREADER class ?? maps information read into a dictionary 
+for loop to run throw csv file 
+add rows or values to the dataset 
+return dataset 
+
+
+
+DATA ANALYSIS 
+LAMBDAS 
+ANONYMOUS FUNCTIONS => => functions defined that are not bound to an identifier 
+lambda function => functions that take several args but can only have one expression
+lambda argu1, argu2 : argu1 * argu2  
+use lambda inside a function 
+
+map => process and transform all items in an iterable. manipulate and change the data 
+def calculateSquare(n): return n ** n 
+numbers = (1, 2, 3, 4) 
+result = map(calculateSquare, numbers) 
+print(result) 
+convert to set 
+print(set(result)) 
+
+use map to convert values that are spit out by a function into an upper case 
+
+example 
+extract date from csv file 
+function with parameters => filepath, delimiter, quotechar 
+import csv 
+put the csv data into a list 
+with open statement 
+content = DictReader(csvfile, delimiter, quotechar) 
+for looop through the content 
+add the rows into empty list 
+return list 
+
+function to extract month with parameter (row) 
+value variable = row parameter['Date'] date index 
+month field is put into an empty string 
+split / to divide date strings 
+MM = a[0] // first index of the csv file 
+copy row into another new variable 
+new variable uses update method to put Month into that 
+return new row 
+
+map(extractmonth method, date indexed field)
+map and lambda functions can be combined 
+filter function is used to get something out of data 
+
+reduce => mathematical technique to reduce an iterable to a single cumulative value 
+
+
+EXCEPTION HANDLING 
+try and except 
+loops and open statements can be in exceptions 
+use exception handling when trying to access a file and not getting it 
+
+
+
+PYTHON ETLs 
+class extract 
+args 
+class extract: 
+def fromCSV(self, filepath, delimiter, quotechar): 
+
+class transform: 
+top N records from the dataset 
+def head()
+last N records from the dataset 
+def tail() 
+def rename_attribute()
+
+class Load 
+
+
+
+APACHE BEAM DOCUMENTATION 
+PIPELINE => A pipeline is a user-constructed graph of transformations that defines the desired data processing operations.
+PCollection => A PCollection is a data set or data stream. The data that a pipeline processes is part of a PCollection.
+PTRANSFORM => A PTransform (or transform) represents a data processing operation, or a step, in your pipeline.
+AGGREGATION => Aggregation is computing a value from multiple (1 or more) input elements.
+USER DEFINED FUNCTION => Some Beam operations allow you to run user-defined code as a way to configure the transform.
+SCHEMA => A schema is a language-independent type definition for a PCollection. 
+SDK => A language-specific library that lets pipeline authors build transforms, construct their pipelines, and submit them to a runner.
+RUNNER => A runner runs a Beam pipeline using the capabilities of your chosen data processing engine.
+WINDOW =>  A PCollection can be subdivided into windows based on the timestamps of the individual elements.
+WATERMARK => A watermark is a guess as to when all data in a certain window is expected to have arrived.
+TRIGGER => A trigger determines when to aggregate the results of each window.
+STATE AND TIMERS => Per-key state and timer callbacks are lower level primitives that give 
+you full control over aggregating input collections that grow over time.
+SPLITTABLE DOFN => Splittable DoFns let you process elements in a non-monolithic way.
+
+
+PIPELINE 
+=> A Beam pipeline is a graph (specifically, a directed acyclic graph) of all the data and computations in your data processing task.
+This includes reading input data, transforming that data, and writing output data. A pipeline is constructed by a user in their SDK of choice. 
+
+DATABASE TABLE => READ DATABASE OF NAMES =(TABLE ROWS) => PARDO (EXTRACT STRINGS WITH 'A')-'A' names 
+DATABASE TABLE => READ DATABASE OF NAMES = (TABLE ROWS) => PARDO (EXTRACT STRINGS START WITH 'B')-'B' names 
+
+
+
+A PCollection is an unordered bag of elements. Each PCollection is a potentially distributed, 
+homogeneous data set or data stream, and is owned by the specific Pipeline object for which it is created.
+
+Multiple pipelines cannot share a PCollection. Beam pipelines process PCollections, 
+and the runner is responsible for storing these elements.
+A PCollection generally contains “big data” 
+(too much data to fit in memory on a single machine).
+
+A bounded PCollection is a dataset of a known, fixed size (alternatively, a dataset that is not growing over time).
+ Bounded data can be processed by batch pipelines.
+An unbounded PCollection is a dataset that grows over time, and the elements are processed as they arrive. 
+Unbounded data must be processed by streaming pipelines.
+
+PTRANSFORM 
+A PTransform (or transform) represents a data processing operation, or a step, in your pipeline.
+A transform is usually applied to one or more input PCollection objects. Transforms 
+that read input are an exception; these transforms might not have an input PCollection.
+
+AGGREGATION 
+Aggregation is computing a value from multiple (1 or more) input elements. 
+In Beam, the primary computational pattern for aggregation is to group all elements with 
+a common key and window then combine each group of elements using an associative and commutative operation.
+
+USER - DEFINED FUNCTION(UDF) 
+Some Beam operations allow you to run user-defined code as a way to configure the transform.
+For example, when using ParDo, user-defined code specifies what operation to apply to every element.
+For Combine, it specifies how values should be combined.
+
+
+DoFn - per-element processing function (used in ParDo)
+
+WindowFn - places elements in windows and merges windows (used in Window and GroupByKey)
+
+ViewFn - adapts a materialized PCollection to a particular interface (used in side inputs)
+
+WindowMappingFn - maps one element’s window to another, and specifies bounds on how far in the past the result window will be (used in side inputs)
+
+CombineFn - associative and commutative aggregation (used in Combine and state)
+
+Coder - encodes user data; some coders have standard formats and are not really UDFs
+
+
+
+SCHEMA 
+A schema is a language-independent type definition for a PCollection. 
+The schema for a PCollection defines elements of that PCollection as an ordered list of named fields.
+
+
+RUNNER 
+A Beam runner runs a Beam pipeline on a specific platform. 
+Most runners are translators or adapters to massively parallel big data processing systems, 
+such as Apache Flink, Apache Spark, Google Cloud Dataflow, and more.
+
+WINDOW 
+Windowing subdivides a PCollection into windows according to the timestamps of its individual elements.
+Windows enable grouping operations over unbounded collections by dividing the collection into windows of finite collections.
+A windowing function tells the runner how to assign elements to one or more initial windows, and how to merge windows of grouped elements. 
+
+
+WATERMARK 
+In any data processing system, there is a certain amount of lag between the time a data event occurs (the “event time”, determined by the timestamp 
+on the data element itself) and the time the actual data element gets processed at any stage in your pipeline (the “processing time”, 
+determined by the clock on the system processing the element).
+
+
+TRIGGER 
+When collecting and grouping data into windows, Beam uses triggers to determine when to emit the aggregated results of each window (referred to as a pane).
+
+STATE AND TIMERS 
+Beam’s windowing and triggers provide an abstraction for grouping and aggregating unbounded input data based on timestamps.
+However, there are aggregation use cases that might require an even higher degree of control.
+
+State:
+Beam provides the State API for manually managing per-key state, allowing for fine-grained control over aggregations. 
+The State API lets you augment element-wise operations (for example, ParDo or Map) with mutable state.
+
+Timers:
+Beam provides a per-key timer callback API that enables delayed processing of data stored using the State API.
+
+Splittable DoFn
+Splittable DoFn (SDF) is a generalization of DoFn that lets you process elements in a non-monolithic way. 
+Splittable DoFn makes it easier to create complex, modular I/O connectors in Beam.
+
+
+WHAT TO CONSIDER WHEN DEVELOPING PIPELINE ?? 
+WHERE IS YOUR INPUT DATA STORED ?? 
+WHAT DOES YOUR DATA LOOK LIKE ?? 
+WHAT DO YOU WANT TO DO WITH YOUR DATA ?? 
+WHAT DOES OUTPUT DATA LOOK LIKE AND WHERE SHOULD IT GO ?? 
+
+
+DESIGN PIPELINE 
+CREATE PIPELINE 
+TEST PIPELINE 
+to test a transform created, you can use 
+1. Create a TestPipeline.
+2. Create some static, known test input data.
+3. Use the Create transform to create a PCollection of your input data.
+4. Apply your transform to the input PCollection and save the resulting output PCollection.
+5. Use PAssert and its subclasses to verify that the output PCollection contains the elements that you expect.
+
+test pipeline 
+with Testpipeline as p: 
+     ... 
+
+
+FROM APACHE_BEAM.TESTING.TEST_PIPELINE (USE THIS) 
+
+
+AI / ML PIPELINES 
+1. Apache Beam enables you to process large volumes of data, both for preprocessing and for inference.
+2. It allows you to experiment with your data during the exploration phase of your project and 
+provides a seamless transition when upscaling your data pipelines as part of your MLOps ecosystem in a production environment.
+3. It enables you to run your model in production on a varying data load, both in batch and streaming.
+
+Data ingestion: Incoming new data is stored in your file system or database, or it’s published to a messaging queue.
+Data validation(BEAM): After you receieve your data, check the quality of your data. For example, 
+you might want to detect outliers and calculate standard deviations and class distributions.
+Data preprocessing(BEAM): After you validate your data, transform the data so that it is ready to use to train your model.
+Model training: When your data is ready, you can start training your AI/ML model. This step is typically repeated multiple times, depending on the quality of your trained model.
+Model validation: Before you deploy your new model, validate its performance and accuracy.
+Model deployment(BEAM): Deploy your model, using it to run inference on new or existing data.
+
+Beam has a rich set of I/O connectors for ingesting and writing data, which allows you 
+to integrate it with your existing file system, database, or messaging queue.
+
+INFERENCE 
+Beam provides different ways to implement inference as part of your pipeline. 
+You can run your ML model directly in your pipeline and apply it on big scale datasets, both in batch and streaming pipelines.
+
+
+RUN INFERENCE 
+The recommended way to implement inference is by using the RunInference API. RunInference takes advantage of existing Apache Beam concepts, 
+such as the BatchElements transform and the Shared class, to enable you to use models in your pipelines 
+to create transforms optimized for machine learning inferences.
+
+
+CUSTOM INFERENCE 
+The RunInference API doesn’t currently support making remote inference calls using, for example, the Natural Language API or the Cloud Vision API. 
+Therefore, in order to use these remote APIs with Apache Beam, you need to write custom inference calls. 
+
+
+ORCHESTRATORS 
+In order to automate and track the AI/ML workflows throughout your project, you can use orchestrators such as Kubeflow pipelines (KFP) or TensorFlow Extended (TFX). 
+These orchestrators automate your different building blocks and handle the transitions between them.
